@@ -1,1 +1,1 @@
-# the-hero-game
+# The hero game
