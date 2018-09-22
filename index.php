@@ -2,7 +2,5 @@
 
 require "vendor/autoload.php";
 
-use emag\App;
-
-$app = new App();
+$app = new \emag\App();
 $app->init();
