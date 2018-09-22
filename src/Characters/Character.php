@@ -4,7 +4,6 @@ namespace emag\Characters;
 
 abstract class Character{
 
-
 	protected $health;
 
 	protected $strength;
@@ -17,7 +16,7 @@ abstract class Character{
 
 
 	function initStats($stats = [])
-    {
+	{
 		foreach($stats as $statKey => $statValue)
 	    {
 	        $this->$statKey = mt_rand($statValue[0], $statValue[1]);
@@ -26,7 +25,7 @@ abstract class Character{
 
     function getStat($stat = null)
     {
-       	return $this->$stat;
+		return $this->$stat;
     }
 }
 

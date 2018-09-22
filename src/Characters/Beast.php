@@ -2,7 +2,8 @@
 
 namespace emag\Characters;
 
-class Beast{
+
+class Beast extends Character{
 
 	function __construct()
 	{
