@@ -5,7 +5,8 @@ namespace emag;
 use emag\Helpers\Logger;
 use emag\Characters\Hero;
 use emag\Characters\Beast;
-
+use emag\Battle\Config;
+use emag\Battle\Battle;
 
 
 class App{
@@ -17,30 +18,32 @@ class App{
 
 	function init()
 	{	
-		$stats = [
-		  'health' => [70, 100],
-		  'strength' => [70, 80],
-		  'speed' => [40, 50],
-		  'defence' => [45, 55],
-		  'luck' => [10, 30]
-		];
-		$hero = new Hero();
-		$hero->initStats($stats);
 
-		
-		$stats = [
-		  'health' => [60, 90],
-		  'strength' => [60, 90],
-		  'speed' => [40, 60],
-		  'defence' => [40, 60],
-		  'luck' => [25, 40]
-		];
-		$beast = new Beast();	
-		$beast->initStats($stats);
+		try{
 
-		echo "<pre>";
-		print_r($hero);
-		print_r($beast);
-		echo "</pre>";	
+			$hero = new Hero();
+			$hero->initStats(Config::HERO_STATS);
+
+			$beast = new Beast();	
+			$beast->initStats(Config::BEAST_STATS);
+
+			$battle = new Battle(new Config);
+			$battle->initHero($hero);
+			$battle->initBeast($beast);
+			$battle->startBattle();
+
+
+			echo "<pre>";
+			print_r($hero);
+			print_r($beast);
+
+			print_r($battle->isEndOfBattle());
+			echo "</pre>";	
+
+		}
+		catch(Exception $e)
+		{
+			print_r($e->getMessage());
+		}
 	}
 }

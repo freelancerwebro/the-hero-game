@@ -17,9 +17,24 @@ abstract class Character{
 
 
 	function initStats($stats = [])
-	{
+	{	
+		if(empty($stats))
+		{
+			throw new \Exception('The stats cannot be empty');
+		}
+
 		foreach($stats as $statKey => $statValue)
 		{
+			if(empty($statValue[0]) || empty($statValue[1]))
+			{
+				throw new \Exception('The minimum or maximum value is missing');
+			}
+
+			if($statValue[0] > $statValue[1])
+			{
+				throw new \Exception('The minimum cannot be greater than maximum');
+			}
+
 			$this->$statKey = mt_rand($statValue[0], $statValue[1]);
 		}
 	}
