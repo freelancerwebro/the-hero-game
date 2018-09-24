@@ -40,7 +40,7 @@ class Battle{
 			$this->changeBattleRounds();
 		}
 
-		$this->printEndOfGame();
+		$this->printBattleResults();
 	}
 
 
@@ -68,8 +68,12 @@ class Battle{
 
 	public function selectFirstAttacker()
 	{
-		$this->attacker = $this->hero;
-		$this->defender = $this->beast;
+		
+		if($this->hero->getStat('speed') > $this->beast->getStat('speed'))
+		{
+			$this->attacker = $this->hero;
+			$this->defender = $this->beast;	
+		}
 	}
 
 	public function getDamage()
@@ -87,7 +91,6 @@ class Battle{
 	{
 		$damage = $this->getDamage();
 
-		//if($this->hasLuck === false)
 		$newHealthValue = $this->defender->getStat('health') - $damage;
 		if($newHealthValue < 0)
 		{	
@@ -107,7 +110,9 @@ class Battle{
 	public function getWinner()
 	{
 		if($this->attacker->getStat('health') > $this->defender->getStat('health'))
+		{
 			return $this->attacker;
+		}
 
 		return $this->defender;
 	}
@@ -115,7 +120,7 @@ class Battle{
 
 	public function printInitialStats()
 	{
-		echo "Start Battle!".PHP_EOL;
+		echo "Start Battle!".PHP_EOL.PHP_EOL;
 		echo "hero health: ".$this->hero->getStat('health').PHP_EOL;
 		echo "hero strength: ".$this->hero->getStat('strength').PHP_EOL;
 		echo "hero speed: ".$this->hero->getStat('speed').PHP_EOL;
@@ -145,7 +150,7 @@ class Battle{
 		echo PHP_EOL;
 	}
 
-	public function printEndOfGame()
+	public function printBattleResults()
 	{
 		echo "Winner is: ".get_class($this->getWinner()).PHP_EOL;
 		echo "GAME OVER!!".PHP_EOL;
