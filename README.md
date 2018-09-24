@@ -54,7 +54,7 @@ Attacker Health: 54
 Defender: Wild Beast
 Defender Health: 0
 
-Winner is: emag\Characters\Hero
+Winner is: Hero
 GAME OVER!!
 ```
 
