@@ -106,6 +106,7 @@ class Battle{
 	public function getDamage()
 	{
     	$damage = 0;
+    	
 		if($this->attacker->getStat('strength') > $this->defender->getStat('defence'))
 		{
       		return $this->attacker->getStat('strength') - $this->defender->getStat('defence');
@@ -124,6 +125,7 @@ class Battle{
 		}
 
 		$newHealthValue = $this->defender->getStat('health') - $damage;
+
 		if($newHealthValue < 0)
 		{	
 			$newHealthValue = 0;
