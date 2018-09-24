@@ -122,18 +122,18 @@ class Battle{
 	public function printInitialStats()
 	{
 		echo "Start Battle!".PHP_EOL.PHP_EOL;
-		echo "hero health: ".$this->hero->getStat('health').PHP_EOL;
-		echo "hero strength: ".$this->hero->getStat('strength').PHP_EOL;
-		echo "hero speed: ".$this->hero->getStat('speed').PHP_EOL;
-		echo "hero defence: ".$this->hero->getStat('defence').PHP_EOL;
-		echo "hero luck: ".$this->hero->getStat('luck').PHP_EOL;
+		echo "Hero health: ".$this->hero->getStat('health').PHP_EOL;
+		echo "Hero strength: ".$this->hero->getStat('strength').PHP_EOL;
+		echo "Hero speed: ".$this->hero->getStat('speed').PHP_EOL;
+		echo "Hero defence: ".$this->hero->getStat('defence').PHP_EOL;
+		echo "Hero luck: ".$this->hero->getStat('luck').PHP_EOL;
 		echo PHP_EOL;
 
-		echo "beast health: ".$this->beast->getStat('health').PHP_EOL;
-		echo "beast strength: ".$this->beast->getStat('strength').PHP_EOL;
-		echo "beast speed: ".$this->beast->getStat('speed').PHP_EOL;
-		echo "beast defence: ".$this->beast->getStat('defence').PHP_EOL;
-		echo "beast luck: ".$this->beast->getStat('luck').PHP_EOL;
+		echo "Beast health: ".$this->beast->getStat('health').PHP_EOL;
+		echo "Beast strength: ".$this->beast->getStat('strength').PHP_EOL;
+		echo "Beast speed: ".$this->beast->getStat('speed').PHP_EOL;
+		echo "Beast defence: ".$this->beast->getStat('defence').PHP_EOL;
+		echo "Beast luck: ".$this->beast->getStat('luck').PHP_EOL;
 		echo PHP_EOL;
 	}
 	
@@ -153,7 +153,7 @@ class Battle{
 
 	public function printBattleResults()
 	{
-		echo "Winner is: ".get_class($this->getWinner()).PHP_EOL;
+		echo "Winner is: ".$this->getWinner()->getName().PHP_EOL;
 		echo "GAME OVER!!".PHP_EOL;
 	}
 
