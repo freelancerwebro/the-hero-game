@@ -68,11 +68,12 @@ class Battle{
 
 	public function selectFirstAttacker()
 	{
-		
+		$this->attacker = $this->hero;
+		$this->defender = $this->beast;	
+
 		if($this->hero->getStat('speed') > $this->beast->getStat('speed'))
 		{
-			$this->attacker = $this->hero;
-			$this->defender = $this->beast;	
+			
 		}
 	}
 
@@ -139,10 +140,10 @@ class Battle{
 	public function printRoundStats($currentRound)
 	{
 		echo "ROUND: ".$currentRound.PHP_EOL;
-		echo "Attacker: ".get_class($this->attacker).PHP_EOL;
+		echo "Attacker: ".$this->attacker->getName().PHP_EOL;
 		echo "Attacker Health: ".$this->attacker->getStat('health').PHP_EOL;
 
-		echo "Defender: ".get_class($this->defender).PHP_EOL;
+		echo "Defender: ".$this->defender->getName().PHP_EOL;
 		echo "Defender Health: ".$this->defender->getStat('health').PHP_EOL;
 
 		//if($this->hasLuck === true)	

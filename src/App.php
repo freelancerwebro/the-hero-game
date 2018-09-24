@@ -23,9 +23,11 @@ class App{
 
 			$hero = new Hero();
 			$hero->initStats(Config::HERO_STATS);
+			$hero->setName("Hero");
 
 			$beast = new Beast();	
 			$beast->initStats(Config::BEAST_STATS);
+			$beast->setName("Wild Beast");
 
 			$battle = new Battle(new Config);
 			$battle->initHero($hero);

@@ -5,6 +5,8 @@ namespace emag\Characters;
 abstract class Character{
 	
 
+	protected $name;
+
 	protected $health;
 
 	protected $strength;
@@ -15,6 +17,16 @@ abstract class Character{
 
 	protected $luck;
 
+
+	function getName()
+	{
+		return $this->name;
+	}
+
+	function setName($name)
+	{
+		$this->name = $name;
+	}
 
 	function initStats($stats = [])
 	{	
@@ -43,7 +55,7 @@ abstract class Character{
 	{
 		return $this->$stat;
 	}
-	
+
 
 	function setHealth($health)
 	{
