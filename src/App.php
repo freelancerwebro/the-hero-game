@@ -33,12 +33,12 @@ class App{
 			$battle->startBattle();
 
 
-			echo "<pre>";
-			print_r($hero);
-			print_r($beast);
+			// echo "<pre>";
+			// print_r($hero);
+			// print_r($beast);
 
-			print_r($battle->isEndOfBattle());
-			echo "</pre>";	
+			// print_r($battle->isEndOfBattle());
+			// echo "</pre>";	
 
 		}
 		catch(Exception $e)

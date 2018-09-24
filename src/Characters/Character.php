@@ -44,5 +44,30 @@ abstract class Character{
 		return $this->$stat;
 	}
 	
+
+	function setHealth($health)
+	{
+		$this->health = $health;
+	}
+
+	function setStrength($strength)
+	{
+		$this->strength = $strength;
+	}
+
+	function setDefence($defence)
+	{
+		$this->defence = $defence;
+	}
+	
+	function setSpeed($speed)
+	{
+		$this->speed = $speed;
+	}
+
+	function setLuck($luck)
+	{
+		$this->luck = $luck;
+	}
 }
 
