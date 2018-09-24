@@ -6,15 +6,17 @@ use emag\Characters\Character;
 
 class Battle{
 	
-	private $currentRound = null;
+	private $currentRound     = null;
 
-	private $attacker 	  = null;
-	private $defender     = null;
+	private $attacker 	      = null;
+	private $defender         = null;
 
-	private $hero 	      = null;
-	private $beast  	  = null;
+	private $hero 	          = null;
+	private $beast  	      = null;
 
-	private $config       = null;
+	private $config       	  = null;
+
+	private $defenderWasLucky = false;
 
 	public function __construct(Config $config)
 	{
@@ -35,6 +37,7 @@ class Battle{
 				break;
 			}
 
+			$this->checkIfDefenderWasLucky();
 			$this->updateDefenderHealth();
 			$this->printRoundStats($round);
 			$this->changeBattleRounds();
@@ -68,13 +71,36 @@ class Battle{
 
 	public function selectFirstAttacker()
 	{
-		$this->attacker = $this->hero;
-		$this->defender = $this->beast;	
-
 		if($this->hero->getStat('speed') > $this->beast->getStat('speed'))
 		{
-			
+			$this->attacker = $this->hero;
+			$this->defender = $this->beast;	
+			return false;
 		}
+
+		if($this->hero->getStat('speed') < $this->beast->getStat('speed'))
+		{
+			$this->attacker = $this->beast;
+			$this->defender = $this->hero;	
+			return false;
+		}
+
+		if($this->hero->getStat('luck') > $this->beast->getStat('luck'))
+		{
+			$this->attacker = $this->hero;
+			$this->defender = $this->beast;	
+			return false;
+		}
+
+		if($this->hero->getStat('luck') < $this->beast->getStat('luck'))
+		{
+			$this->attacker = $this->beast;
+			$this->defender = $this->hero;	
+			return false;
+		}
+
+		$this->attacker = $this->hero;
+		$this->defender = $this->beast;	
 	}
 
 	public function getDamage()
@@ -91,6 +117,11 @@ class Battle{
 	public function updateDefenderHealth()
 	{
 		$damage = $this->getDamage();
+
+		if($this->defenderWasLucky === true)
+		{
+			$damage = 0;
+		}
 
 		$newHealthValue = $this->defender->getStat('health') - $damage;
 		if($newHealthValue < 0)
@@ -116,6 +147,18 @@ class Battle{
 		}
 
 		return $this->defender;
+	}
+
+	public function checkIfDefenderWasLucky()
+	{
+		$rand = mt_rand(0, 100);
+		if($rand <= 50)
+		{
+			$this->defenderWasLucky = true;
+			return;
+		}	
+
+		$this->defenderWasLucky = false;
 	}
 
 
@@ -146,8 +189,11 @@ class Battle{
 		echo "Defender: ".$this->defender->getName().PHP_EOL;
 		echo "Defender Health: ".$this->defender->getStat('health').PHP_EOL;
 
-		//if($this->hasLuck === true)	
-			//echo "Defender hasLuck: ".$this->hasLuck.PHP_EOL;
+		if($this->defenderWasLucky === true)
+		{
+			echo "Defender was lucky. No damage will be taken.".PHP_EOL;	
+		}	
+			
 		echo PHP_EOL;
 	}
 
