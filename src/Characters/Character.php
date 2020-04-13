@@ -4,7 +4,6 @@ namespace HeroGame\Characters;
 
 abstract class Character{
 	
-
 	protected $name;
 
 	protected $health;
@@ -56,7 +55,6 @@ abstract class Character{
 		return $this->$stat;
 	}
 
-
 	function setHealth($health)
 	{
 		$this->health = $health;
@@ -82,4 +80,3 @@ abstract class Character{
 		$this->luck = $luck;
 	}
 }
-

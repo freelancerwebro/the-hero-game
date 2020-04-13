@@ -2,7 +2,6 @@
 
 namespace HeroGame\Characters;
 
-
 class Beast extends Character{
 
 	function __construct()

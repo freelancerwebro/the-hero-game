@@ -8,19 +8,10 @@ use HeroGame\Characters\Beast;
 use HeroGame\Battle\Config;
 use HeroGame\Battle\Battle;
 
-
 class App{
-
-	function isSingle()
-	{
-		return true;
-	}
-
 	function init()
 	{	
-
 		try{
-
 			$hero = new Hero();
 			$hero->initStats(Config::HERO_STATS);
 			$hero->setName("Hero");
@@ -33,15 +24,6 @@ class App{
 			$battle->initHero($hero);
 			$battle->initBeast($beast);
 			$battle->startBattle();
-
-
-			// echo "<pre>";
-			// print_r($hero);
-			// print_r($beast);
-
-			// print_r($battle->isEndOfBattle());
-			// echo "</pre>";	
-
 		}
 		catch(Exception $e)
 		{

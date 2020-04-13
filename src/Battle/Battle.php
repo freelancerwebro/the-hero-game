@@ -57,8 +57,6 @@ class Battle{
 		$this->beast = $beast;
 	}
 
-
-
 	public function isEndOfBattle()
 	{
 		if($this->defender->getStat('health') <= 0 || $this->attacker->getStat('health') <= 0)
@@ -204,6 +202,4 @@ class Battle{
 		echo "Winner is: ".$this->getWinner()->getName().PHP_EOL;
 		echo "GAME OVER!!".PHP_EOL;
 	}
-
-
 }
