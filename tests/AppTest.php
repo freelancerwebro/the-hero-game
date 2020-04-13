@@ -2,7 +2,7 @@
 
 require "vendor/autoload.php";
 
-use emag\App;
+use HeroGame\App;
 
 class AppTest extends PHPUnit_Framework_TestCase
 {

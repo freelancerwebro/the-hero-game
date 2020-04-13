@@ -1,8 +1,8 @@
 <?php
 
-namespace emag\Battle;
+namespace HeroGame\Battle;
 
-use emag\Characters\Character;
+use HeroGame\Characters\Character;
 
 class Battle{
 	

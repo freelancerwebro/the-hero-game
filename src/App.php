@@ -1,12 +1,12 @@
 <?php
 
-namespace emag;
+namespace HeroGame;
 
-use emag\Helpers\Logger;
-use emag\Characters\Hero;
-use emag\Characters\Beast;
-use emag\Battle\Config;
-use emag\Battle\Battle;
+use HeroGame\Helpers\Logger;
+use HeroGame\Characters\Hero;
+use HeroGame\Characters\Beast;
+use HeroGame\Battle\Config;
+use HeroGame\Battle\Battle;
 
 
 class App{

@@ -1,6 +1,6 @@
 <?php
 
-namespace emag\Battle;
+namespace HeroGame\Battle;
 
 class Config{
 

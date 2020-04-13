@@ -1,6 +1,6 @@
 <?php
 
-namespace emag\Characters;
+namespace HeroGame\Characters;
 
 abstract class Character{
 	

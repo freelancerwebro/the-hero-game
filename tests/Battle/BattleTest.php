@@ -2,7 +2,7 @@
 
 require "vendor/autoload.php";
 
-use emag\Battle\Battle;
+use HeroGame\Battle\Battle;
 
 class BattleTest extends PHPUnit_Framework_TestCase{
 	
