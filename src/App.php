@@ -1,7 +1,6 @@
 <?php
 namespace HeroGame;
 
-use HeroGame\Helpers\Logger;
 use HeroGame\Characters\Hero;
 use HeroGame\Characters\Beast;
 use HeroGame\Battle\Config;
