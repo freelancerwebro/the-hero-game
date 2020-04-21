@@ -5,7 +5,7 @@ use HeroGame\Characters\Hero;
 use HeroGame\Characters\Beast;
 use HeroGame\Battle\Config;
 use HeroGame\Battle\Battle;
-use HeroGame\Battle\BattleConsoleLogger;
+use HeroGame\Logger\BattleConsoleLogger;
 
 class App{
     function init()

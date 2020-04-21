@@ -1,5 +1,6 @@
 <?php
-namespace HeroGame\Battle;
+namespace HeroGame\Logger;
+use HeroGame\Battle\BattleInterface;
 
 class BattleConsoleLogger implements LoggerInterface {
 

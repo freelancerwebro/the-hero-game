@@ -1,6 +1,7 @@
 <?php
 namespace HeroGame\Battle;
 use HeroGame\Characters\Character;
+use HeroGame\Logger\LoggerInterface;
 
 class Battle implements BattleInterface {
     
