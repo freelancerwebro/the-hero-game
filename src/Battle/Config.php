@@ -12,6 +12,7 @@ class Config implements ConfigInterface {
         'defence'   => [45, 55],
         'luck'      => [10, 30]
     ];
+    const HERO_NAME = "Hero";
 
     const BEAST_STATS = [
         'health'    => [60, 90],
@@ -20,4 +21,5 @@ class Config implements ConfigInterface {
         'defence'   => [40, 60],
         'luck'      => [25, 40]
     ];
+    const BEAST_NAME = "Beast";
 }

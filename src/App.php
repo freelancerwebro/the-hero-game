@@ -14,11 +14,11 @@ class App{
         try{
             $hero = new Hero();
             $hero->initStats(Config::HERO_STATS);
-            $hero->setName("Hero");
+            $hero->setName(Config::HERO_NAME);
 
             $beast = new Beast();   
             $beast->initStats(Config::BEAST_STATS);
-            $beast->setName("Beast");
+            $beast->setName(Config::BEAST_NAME);
 
             $battle = new Battle(new Config, new BattleConsoleLogger);
             $battle->initHero($hero);
