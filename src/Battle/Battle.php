@@ -2,6 +2,7 @@
 namespace HeroGame\Battle;
 use HeroGame\Characters\Character;
 use HeroGame\Logger\LoggerInterface;
+use HeroGame\Config\ConfigInterface;
 
 class Battle implements BattleInterface {
     

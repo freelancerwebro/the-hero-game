@@ -1,5 +1,5 @@
 <?php
-namespace HeroGame\Battle;
+namespace HeroGame\Config;
 
 interface ConfigInterface {
 

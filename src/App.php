@@ -3,7 +3,7 @@ namespace HeroGame;
 
 use HeroGame\Characters\Hero;
 use HeroGame\Characters\Beast;
-use HeroGame\Battle\Config;
+use HeroGame\Config\Config;
 use HeroGame\Battle\Battle;
 use HeroGame\Logger\BattleConsoleLogger;
 
