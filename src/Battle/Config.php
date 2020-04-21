@@ -1,8 +1,7 @@
 <?php
-
 namespace HeroGame\Battle;
 
-class Config{
+class Config implements ConfigInterface {
 
     const BATTLE_ROUNDS = 20;
 

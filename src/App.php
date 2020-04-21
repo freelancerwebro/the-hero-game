@@ -1,5 +1,4 @@
 <?php
-
 namespace HeroGame;
 
 use HeroGame\Helpers\Logger;
@@ -7,6 +6,7 @@ use HeroGame\Characters\Hero;
 use HeroGame\Characters\Beast;
 use HeroGame\Battle\Config;
 use HeroGame\Battle\Battle;
+use HeroGame\Battle\BattleConsoleLogger;
 
 class App{
     function init()
@@ -20,7 +20,7 @@ class App{
             $beast->initStats(Config::BEAST_STATS);
             $beast->setName("Beast");
 
-            $battle = new Battle(new Config);
+            $battle = new Battle(new Config, new BattleConsoleLogger);
             $battle->initHero($hero);
             $battle->initBeast($beast);
             $battle->startBattle();

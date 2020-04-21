@@ -1,10 +1,8 @@
 <?php
-
 namespace HeroGame\Battle;
-
 use HeroGame\Characters\Character;
 
-class Battle{
+class Battle implements BattleInterface {
     
     private $currentRound     = null;
 
@@ -15,13 +13,50 @@ class Battle{
     private $beast            = null;
 
     private $config           = null;
+    private $logger           = null;
 
     private $defenderWasLucky = false;
 
-    public function __construct(Config $config)
+    public function __construct(ConfigInterface $config, LoggerInterface $logger)
     {
         $this->config = $config;
-    }   
+        $this->logger = $logger;
+    }
+
+    public function initHero(Character $hero)
+    {
+        $this->hero = $hero;
+    }
+
+    public function initBeast(Character $beast)
+    {
+        $this->beast = $beast;
+    }
+
+    public function getHero()
+    {
+        return $this->hero;
+    }
+
+    public function getBeast()
+    {
+        return $this->beast;
+    }
+
+    public function getAttacker()
+    {
+        return $this->attacker;
+    }
+
+    public function getDefender()
+    {
+        return $this->defender;
+    }
+
+    public function getDefenderWasLucky()
+    {
+        return $this->defenderWasLucky;
+    }
 
     public function startBattle()
     {
@@ -44,16 +79,6 @@ class Battle{
         }
 
         $this->printBattleResults();
-    }
-
-    public function initHero(Character $hero)
-    {
-        $this->hero = $hero;
-    }
-
-    public function initBeast(Character $beast)
-    {
-        $this->beast = $beast;
     }
 
     public function isEndOfBattle()
@@ -160,45 +185,18 @@ class Battle{
         $this->defenderWasLucky = false;
     }
 
-
     public function printInitialStats()
     {
-        echo "Start Battle!".PHP_EOL.PHP_EOL;
-        echo "Hero health: ".$this->hero->getStat('health').PHP_EOL;
-        echo "Hero strength: ".$this->hero->getStat('strength').PHP_EOL;
-        echo "Hero speed: ".$this->hero->getStat('speed').PHP_EOL;
-        echo "Hero defence: ".$this->hero->getStat('defence').PHP_EOL;
-        echo "Hero luck: ".$this->hero->getStat('luck').PHP_EOL;
-        echo PHP_EOL;
-
-        echo "Beast health: ".$this->beast->getStat('health').PHP_EOL;
-        echo "Beast strength: ".$this->beast->getStat('strength').PHP_EOL;
-        echo "Beast speed: ".$this->beast->getStat('speed').PHP_EOL;
-        echo "Beast defence: ".$this->beast->getStat('defence').PHP_EOL;
-        echo "Beast luck: ".$this->beast->getStat('luck').PHP_EOL;
-        echo PHP_EOL;
+        $this->logger->printInitialStats($this);
     }
     
     public function printRoundStats($currentRound)
     {
-        echo "ROUND: ".$currentRound.PHP_EOL;
-        echo "Attacker: ".$this->attacker->getName().PHP_EOL;
-        echo "Attacker Health: ".$this->attacker->getStat('health').PHP_EOL;
-
-        echo "Defender: ".$this->defender->getName().PHP_EOL;
-        echo "Defender Health: ".$this->defender->getStat('health').PHP_EOL;
-
-        if($this->defenderWasLucky === true)
-        {
-            echo "Defender was lucky. No damage will be taken.".PHP_EOL;    
-        }   
-            
-        echo PHP_EOL;
+        $this->logger->printRoundStats($this, $currentRound);
     }
 
     public function printBattleResults()
     {
-        echo "Winner is: ".$this->getWinner()->getName().PHP_EOL;
-        echo "GAME OVER!!".PHP_EOL;
+        $this->logger->printBattleResults($this);
     }
 }
