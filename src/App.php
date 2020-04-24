@@ -6,18 +6,16 @@ use HeroGame\Characters\Beast;
 use HeroGame\Config\Config;
 use HeroGame\Battle\Battle;
 use HeroGame\Logger\BattleConsoleLogger;
+use HeroGame\Characters\RandomStatsGenerator;
 
 class App{
     function init()
     {   
         try{
             $hero = new Hero();
-            $hero->initStats(Config::HERO_STATS);
-            $hero->setName(Config::HERO_NAME);
-
-            $beast = new Beast();   
-            $beast->initStats(Config::BEAST_STATS);
-            $beast->setName(Config::BEAST_NAME);
+            $hero->initStats(new RandomStatsGenerator, Config::HERO_STATS);
+            $beast = new Beast();
+            $beast->initStats(new RandomStatsGenerator, Config::BEAST_STATS);
 
             $battle = new Battle(new Config, new BattleConsoleLogger);
             $battle->initHero($hero);

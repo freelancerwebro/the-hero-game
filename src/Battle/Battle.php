@@ -24,7 +24,7 @@ class Battle implements BattleInterface {
         $this->config = $config;
         $this->logger = $logger;
     }
-
+    
     public function initHero(Character $hero)
     {
         $this->hero = $hero;
