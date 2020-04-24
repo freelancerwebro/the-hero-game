@@ -3,6 +3,7 @@
 require "vendor/autoload.php";
 
 use HeroGame\Characters\Hero;
+use HeroGame\Characters\RandomStatsGenerator;
 
 class HeroTest extends PHPUnit_Framework_TestCase{
     
@@ -14,8 +15,8 @@ class HeroTest extends PHPUnit_Framework_TestCase{
         $this->setExpectedException(Exception::class, "The stats cannot be empty");
 
         $stats = [];
-        $hero = new Hero();
-        $hero->initStats($stats);
+        $generator = new RandomStatsGenerator();
+        $hero = new Hero($generator, $stats);
     }
 
     public function testMinimumOrMaximumIsMissing()
@@ -29,8 +30,8 @@ class HeroTest extends PHPUnit_Framework_TestCase{
             'defence'   => [],
             'luck'      => [10, 30]
         ];
-        $hero = new Hero();
-        $hero->initStats($stats);
+        $generator = new RandomStatsGenerator();
+        $hero = new Hero($generator, $stats);
     }
 
     public function testMinimumIsGreaterThanMaximum()
@@ -44,8 +45,8 @@ class HeroTest extends PHPUnit_Framework_TestCase{
             'defence'   => [30, 50],
             'luck'      => [10, 30]
         ];
-        $hero = new Hero();
-        $hero->initStats($stats);
+        $generator = new RandomStatsGenerator();
+        $hero = new Hero($generator, $stats);
     }
 
     public function testStatsValuesAreNotEmpty()
@@ -57,8 +58,8 @@ class HeroTest extends PHPUnit_Framework_TestCase{
             'defence'   => [30, 50],
             'luck'      => [10, 30]
         ];
-        $hero = new Hero();
-        $hero->initStats($stats);
+        $generator = new RandomStatsGenerator();
+        $hero = new Hero($generator, $stats);
 
         $health = $hero->getStat("health");
         $strength = $hero->getStat("strength");
@@ -82,8 +83,8 @@ class HeroTest extends PHPUnit_Framework_TestCase{
             'defence'   => [30, 50],
             'luck'      => [10, 30]
         ];
-        $hero = new Hero();
-        $hero->initStats($stats);
+        $generator = new RandomStatsGenerator();
+        $hero = new Hero($generator, $stats);
 
         $health = $hero->getStat("health");
         $this->assertTrue($health >= $stats['health'][0]);

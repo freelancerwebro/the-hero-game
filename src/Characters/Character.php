@@ -16,6 +16,11 @@ abstract class Character{
 
     protected $luck;
 
+    public function __construct(StatsGeneratorInterface $generator, $stats = [])
+    {
+        $generator->generate($this, $stats);
+    }
+
     function getName()
     {
         return $this->name;
@@ -54,10 +59,5 @@ abstract class Character{
     function setLuck($luck)
     {
         $this->luck = $luck;
-    }
-
-    function initStats(StatsGeneratorInterface $generator, $stats = [])
-    {
-        $generator->generate($this, $stats);
     }
 }
