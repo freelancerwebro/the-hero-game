@@ -21,43 +21,69 @@ abstract class Character{
         $generator->generate($this, $stats);
     }
 
-    function getName()
+    public function getName()
     {
         return $this->name;
     }
 
-    function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
-    function getStat($stat = null)
+    public function getHealth()
     {
-        return $this->$stat;
+        return $this->health;
     }
 
-    function setHealth($health)
+    public function setHealth($health)
     {
         $this->health = $health;
+        return $this;
     }
 
-    function setStrength($strength)
+    public function getStrength()
+    {
+        return $this->strength;
+    }
+
+    public function setStrength($strength)
     {
         $this->strength = $strength;
+        return $this;
     }
 
-    function setDefence($defence)
+    public function getDefence()
+    {
+        return $this->defence;
+    }
+
+    public function setDefence($defence)
     {
         $this->defence = $defence;
+        return $this;
     }
     
-    function setSpeed($speed)
+    public function getSpeed()
     {
-        $this->speed = $speed;
+        return $this->speed;
     }
 
-    function setLuck($luck)
+    public function setSpeed($speed)
+    {
+        $this->speed = $speed;
+        return $this;
+    }
+
+    public function getLuck()
+    {
+        return $this->luck;
+    }
+
+    public function setLuck($luck)
     {
         $this->luck = $luck;
+        return $this;
     }
 }

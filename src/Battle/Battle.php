@@ -24,7 +24,7 @@ class Battle implements BattleInterface {
         $this->config = $config;
         $this->logger = $logger;
     }
-    
+
     public function initHero(Character $hero)
     {
         $this->hero = $hero;
@@ -85,7 +85,7 @@ class Battle implements BattleInterface {
 
     public function isEndOfBattle()
     {
-        if($this->defender->getStat('health') <= 0 || $this->attacker->getStat('health') <= 0)
+        if($this->defender->getHealth() <= 0 || $this->attacker->getHealth() <= 0)
         {
             return true;
         }
@@ -95,28 +95,28 @@ class Battle implements BattleInterface {
 
     public function selectFirstAttacker()
     {
-        if($this->hero->getStat('speed') > $this->beast->getStat('speed'))
+        if($this->hero->getSpeed() > $this->beast->getSpeed())
         {
             $this->attacker = $this->hero;
             $this->defender = $this->beast; 
             return false;
         }
 
-        if($this->hero->getStat('speed') < $this->beast->getStat('speed'))
+        if($this->hero->getSpeed() < $this->beast->getSpeed())
         {
             $this->attacker = $this->beast;
             $this->defender = $this->hero;  
             return false;
         }
 
-        if($this->hero->getStat('luck') > $this->beast->getStat('luck'))
+        if($this->hero->getLuck() > $this->beast->getLuck())
         {
             $this->attacker = $this->hero;
             $this->defender = $this->beast; 
             return false;
         }
 
-        if($this->hero->getStat('luck') < $this->beast->getStat('luck'))
+        if($this->hero->getLuck() < $this->beast->getLuck())
         {
             $this->attacker = $this->beast;
             $this->defender = $this->hero;  
@@ -131,9 +131,9 @@ class Battle implements BattleInterface {
     {
         $damage = 0;
         
-        if($this->attacker->getStat('strength') > $this->defender->getStat('defence'))
+        if($this->attacker->getStrength() > $this->defender->getDefence())
         {
-            return $this->attacker->getStat('strength') - $this->defender->getStat('defence');
+            return $this->attacker->getStrength() - $this->defender->getDefence();
         }
 
         return $damage;
@@ -148,7 +148,7 @@ class Battle implements BattleInterface {
             $damage = 0;
         }
 
-        $newHealthValue = $this->defender->getStat('health') - $damage;
+        $newHealthValue = $this->defender->getHealth() - $damage;
 
         if($newHealthValue < 0)
         {   
@@ -167,7 +167,7 @@ class Battle implements BattleInterface {
 
     public function getWinner()
     {
-        if($this->attacker->getStat('health') > $this->defender->getStat('health'))
+        if($this->attacker->getHealth() > $this->defender->getHealth())
         {
             return $this->attacker;
         }

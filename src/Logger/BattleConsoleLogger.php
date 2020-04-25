@@ -7,18 +7,18 @@ class BattleConsoleLogger implements LoggerInterface {
     public function printInitialStats(BattleInterface $battle)
     {
         echo "Start Battle!".PHP_EOL.PHP_EOL;
-        echo "Hero health: ".$battle->getHero()->getStat('health').PHP_EOL;
-        echo "Hero strength: ".$battle->getHero()->getStat('strength').PHP_EOL;
-        echo "Hero speed: ".$battle->getHero()->getStat('speed').PHP_EOL;
-        echo "Hero defence: ".$battle->getHero()->getStat('defence').PHP_EOL;
-        echo "Hero luck: ".$battle->getHero()->getStat('luck').PHP_EOL;
+        echo "Hero health: ".$battle->getHero()->getHealth().PHP_EOL;
+        echo "Hero strength: ".$battle->getHero()->getStrength().PHP_EOL;
+        echo "Hero speed: ".$battle->getHero()->getSpeed().PHP_EOL;
+        echo "Hero defence: ".$battle->getHero()->getDefence().PHP_EOL;
+        echo "Hero luck: ".$battle->getHero()->getLuck().PHP_EOL;
         echo PHP_EOL;
 
-        echo "Beast health: ".$battle->getBeast()->getStat('health').PHP_EOL;
-        echo "Beast strength: ".$battle->getBeast()->getStat('strength').PHP_EOL;
-        echo "Beast speed: ".$battle->getBeast()->getStat('speed').PHP_EOL;
-        echo "Beast defence: ".$battle->getBeast()->getStat('defence').PHP_EOL;
-        echo "Beast luck: ".$battle->getBeast()->getStat('luck').PHP_EOL;
+        echo "Beast health: ".$battle->getBeast()->getHealth().PHP_EOL;
+        echo "Beast strength: ".$battle->getBeast()->getStrength().PHP_EOL;
+        echo "Beast speed: ".$battle->getBeast()->getSpeed().PHP_EOL;
+        echo "Beast defence: ".$battle->getBeast()->getDefence().PHP_EOL;
+        echo "Beast luck: ".$battle->getBeast()->getLuck().PHP_EOL;
         echo PHP_EOL;
     }
 
@@ -26,10 +26,10 @@ class BattleConsoleLogger implements LoggerInterface {
     {
         echo "ROUND: ".$currentRound.PHP_EOL;
         echo "Attacker: ".$battle->getAttacker()->getName().PHP_EOL;
-        echo "Attacker Health: ".$battle->getAttacker()->getStat('health').PHP_EOL;
+        echo "Attacker Health: ".$battle->getAttacker()->getHealth().PHP_EOL;
 
         echo "Defender: ".$battle->getDefender()->getName().PHP_EOL;
-        echo "Defender Health: ".$battle->getDefender()->getStat('health').PHP_EOL;
+        echo "Defender Health: ".$battle->getDefender()->getHealth().PHP_EOL;
 
         if($battle->getDefenderWasLucky() === true)
         {

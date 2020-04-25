@@ -61,11 +61,11 @@ class HeroTest extends PHPUnit_Framework_TestCase{
         $generator = new RandomStatsGenerator();
         $hero = new Hero($generator, $stats);
 
-        $health = $hero->getStat("health");
-        $strength = $hero->getStat("strength");
-        $speed = $hero->getStat("speed");
-        $defence = $hero->getStat("defence");
-        $luck = $hero->getStat("luck");
+        $health = $hero->getHealth();
+        $strength = $hero->getStrength();
+        $speed = $hero->getSpeed();
+        $defence = $hero->getDefence();
+        $luck = $hero->getLuck();
 
         $this->assertNotEmpty($health);
         $this->assertNotEmpty($strength);
@@ -86,23 +86,23 @@ class HeroTest extends PHPUnit_Framework_TestCase{
         $generator = new RandomStatsGenerator();
         $hero = new Hero($generator, $stats);
 
-        $health = $hero->getStat("health");
+        $health = $hero->getHealth();
         $this->assertTrue($health >= $stats['health'][0]);
         $this->assertTrue($health <= $stats['health'][1]);
 
-        $strength = $hero->getStat("strength");
+        $strength = $hero->getStrength();
         $this->assertTrue($strength >= $stats['strength'][0]);
         $this->assertTrue($strength <= $stats['strength'][1]);
 
-        $speed = $hero->getStat("speed");
+        $speed = $hero->getSpeed();
         $this->assertTrue($speed >= $stats['speed'][0]);
         $this->assertTrue($speed <= $stats['speed'][1]);
 
-        $defence = $hero->getStat("defence");
+        $defence = $hero->getDefence();
         $this->assertTrue($defence >= $stats['defence'][0]);
         $this->assertTrue($defence <= $stats['defence'][1]);
 
-        $luck = $hero->getStat("luck");
+        $luck = $hero->getLuck();
         $this->assertTrue($luck >= $stats['luck'][0]);
         $this->assertTrue($luck <= $stats['luck'][1]);
     }

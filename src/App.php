@@ -12,8 +12,8 @@ class App{
     function init()
     {   
         try{
-            $hero  = new Hero(new RandomStatsGenerator, Config::HERO_STATS);
-            $beast = new Beast(new RandomStatsGenerator, Config::BEAST_STATS);
+            $hero  = (new Hero(new RandomStatsGenerator, Config::HERO_STATS))->setName(Config::HERO_NAME);
+            $beast = (new Beast(new RandomStatsGenerator, Config::BEAST_STATS))->setName(Config::BEAST_NAME);
 
             $battle = new Battle(new Config, new BattleConsoleLogger);
             $battle->initHero($hero);
