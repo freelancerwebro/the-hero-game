@@ -12,13 +12,15 @@ class App{
     function init()
     {   
         try{
-            $hero  = (new Hero(new RandomStatsGenerator, Config::HERO_STATS))->setName(Config::HERO_NAME);
-            $beast = (new Beast(new RandomStatsGenerator, Config::BEAST_STATS))->setName(Config::BEAST_NAME);
+            $hero  = (new Hero(new RandomStatsGenerator, Config::HERO_STATS))
+                ->setName(Config::HERO_NAME);
+            $beast = (new Beast(new RandomStatsGenerator, Config::BEAST_STATS))
+                ->setName(Config::BEAST_NAME);
 
-            $battle = new Battle(new Config, new BattleConsoleLogger);
-            $battle->initHero($hero);
-            $battle->initBeast($beast);
-            $battle->startBattle();
+            $battle = (new Battle(new Config, new BattleConsoleLogger))
+                ->initHero($hero)
+                ->initBeast($beast)
+                ->startBattle();
         }
         catch(Exception $e)
         {

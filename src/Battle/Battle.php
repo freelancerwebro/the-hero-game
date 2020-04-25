@@ -28,11 +28,13 @@ class Battle implements BattleInterface {
     public function initHero(Character $hero)
     {
         $this->hero = $hero;
+        return $this;
     }
 
     public function initBeast(Character $beast)
     {
         $this->beast = $beast;
+        return $this;
     }
 
     public function getHero()
