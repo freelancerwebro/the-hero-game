@@ -1,5 +1,5 @@
 <?php
-namespace HeroGame\Characters;
+namespace HeroGame\Factory;
 use HeroGame\Config\Config;
 use HeroGame\Characters\RandomStatsGenerator;
 use HeroGame\Characters\Hero;

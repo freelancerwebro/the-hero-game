@@ -1,5 +1,5 @@
 <?php
-namespace HeroGame\Characters;
+namespace HeroGame\Factory;
 
 interface CharacterFactory
 {

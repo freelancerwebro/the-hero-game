@@ -1,8 +1,8 @@
 <?php
 namespace HeroGame;
-use HeroGame\Battle\BattleFactory;
-use HeroGame\Characters\HeroFactory;
-use HeroGame\Characters\BeastFactory;
+use HeroGame\Factory\BattleFactory;
+use HeroGame\Factory\HeroFactory;
+use HeroGame\Factory\BeastFactory;
 
 class App{
     function init()

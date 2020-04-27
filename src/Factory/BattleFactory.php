@@ -1,5 +1,5 @@
 <?php
-namespace HeroGame\Battle;
+namespace HeroGame\Factory;
 use HeroGame\Logger\BattleConsoleLogger;
 use HeroGame\Config\Config;
 use HeroGame\Battle\Battle;
