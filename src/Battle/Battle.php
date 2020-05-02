@@ -185,7 +185,7 @@ class Battle implements BattleInterface {
     private function checkIfDefenderWasLucky()
     {
         $rand = mt_rand(0, 100);
-        if($rand <= 50)
+        if($rand <= $this->defender->getLuck())
         {
             $this->defenderWasLucky = true;
             return;
