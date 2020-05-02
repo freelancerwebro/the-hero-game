@@ -76,16 +76,21 @@ class Battle implements BattleInterface {
                 break;
             }
 
-            $this->checkIfDefenderWasLucky();
-            $this->updateDefenderHealth();
-            $this->printRoundStats($round);
-            $this->changeBattleRounds();
+            $this->playRound($round);
         }
 
         $this->printBattleResults();
     }
 
-    public function isEndOfBattle()
+    private function playRound(int $round)
+    {
+        $this->checkIfDefenderWasLucky();
+        $this->updateDefenderHealth();
+        $this->printRoundStats($round);
+        $this->switchPlayerRoles();
+    }
+
+    private function isEndOfBattle()
     {
         if($this->defender->getHealth() <= 0 || $this->attacker->getHealth() <= 0)
         {
@@ -95,7 +100,7 @@ class Battle implements BattleInterface {
         return false;
     }
 
-    public function selectFirstAttacker()
+    private function selectFirstAttacker()
     {
         if($this->hero->getSpeed() > $this->beast->getSpeed())
         {
@@ -129,7 +134,7 @@ class Battle implements BattleInterface {
         $this->defender = $this->beast; 
     }
 
-    public function getDamage()
+    private function calculateDamage()
     {
         $damage = 0;
         
@@ -141,9 +146,9 @@ class Battle implements BattleInterface {
         return $damage;
     }
 
-    public function updateDefenderHealth()
+    private function updateDefenderHealth()
     {
-        $damage = $this->getDamage();
+        $damage = $this->calculateDamage();
 
         if($this->defenderWasLucky === true)
         {
@@ -160,7 +165,7 @@ class Battle implements BattleInterface {
         $this->defender->setHealth($newHealthValue);
     }
 
-    public function changeBattleRounds()
+    private function switchPlayerRoles()
     {
         $temp = $this->attacker;
         $this->attacker = $this->defender;
@@ -177,7 +182,7 @@ class Battle implements BattleInterface {
         return $this->defender;
     }
 
-    public function checkIfDefenderWasLucky()
+    private function checkIfDefenderWasLucky()
     {
         $rand = mt_rand(0, 100);
         if($rand <= 50)
@@ -189,17 +194,17 @@ class Battle implements BattleInterface {
         $this->defenderWasLucky = false;
     }
 
-    public function printInitialStats()
+    private function printInitialStats()
     {
         $this->logger->printInitialStats($this);
     }
     
-    public function printRoundStats($currentRound)
+    private function printRoundStats($currentRound)
     {
         $this->logger->printRoundStats($this, $currentRound);
     }
 
-    public function printBattleResults()
+    private function printBattleResults()
     {
         $this->logger->printBattleResults($this);
     }
