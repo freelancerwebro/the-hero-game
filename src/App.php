@@ -5,7 +5,7 @@ use HeroGame\Factory\HeroFactory;
 use HeroGame\Factory\BeastFactory;
 
 class App{
-    function init()
+    public static function init()
     {   
         try{
             $hero  = HeroFactory::create();
