@@ -1,211 +1,129 @@
 <?php
+
+declare(strict_types=1);
+
 namespace HeroGame\Battle;
+
 use HeroGame\Characters\Character;
-use HeroGame\Logger\LoggerInterface;
-use HeroGame\Config\ConfigInterface;
+use HeroGame\Characters\Hero;
 
-class Battle implements BattleInterface {
-    
-    private $currentRound     = null;
+class Battle
+{
+    private array $log = [];
+    private int $rounds = 20;
 
-    private $attacker         = null;
-    private $defender         = null;
-
-    private $hero             = null;
-    private $beast            = null;
-
-    private $config           = null;
-    private $logger           = null;
-
-    private $defenderWasLucky = false;
-
-    public function __construct(ConfigInterface $config, LoggerInterface $logger)
-    {
-        $this->config = $config;
-        $this->logger = $logger;
+    public function __construct(
+        private readonly Character $player1,
+        private readonly Character $player2
+    ) {
     }
 
-    public function initHero(Character $hero)
+    public function start(): void
     {
-        $this->hero = $hero;
-        return $this;
-    }
+        [$attacker, $defender] = $this->decideFirstAttacker();
 
-    public function initBeast(Character $beast)
-    {
-        $this->beast = $beast;
-        return $this;
-    }
+        $this->prepareInitialStats($attacker, $defender);
 
-    public function getHero()
-    {
-        return $this->hero;
-    }
+        for ($round = 1; $round <= $this->rounds; $round++) {
+            $this->log[] = "ROUND $round";
+            $this->log[] = "---------------------------------------------------------------------";
+            $this->log[] = "{$attacker->getName()} attacks {$defender->getName()}!";
 
-    public function getBeast()
-    {
-        return $this->beast;
-    }
+            $this->switchRounds($attacker, $defender);
 
-    public function getAttacker()
-    {
-        return $this->attacker;
-    }
-
-    public function getDefender()
-    {
-        return $this->defender;
-    }
-
-    public function getDefenderWasLucky()
-    {
-        return $this->defenderWasLucky;
-    }
-
-    public function startBattle()
-    {
-        $this->printInitialStats();
-        $this->selectFirstAttacker();
-
-        for($round = 1; $round <= $this->config::BATTLE_ROUNDS; $round++)
-        {
-            $this->currentRound = $round;
-
-            if($this->isEndOfBattle() === true)
-            {
+            if (!$attacker->isAlive() || !$defender->isAlive()) {
                 break;
             }
 
-            $this->playRound($round);
+            [$attacker, $defender] = [$defender, $attacker];
+            $this->log[] = "";
         }
 
-        $this->printBattleResults();
+        $this->declareWinner();
+        $this->printLog();
     }
 
-    private function playRound(int $round)
+    private function decideFirstAttacker(): array
     {
-        $this->checkIfDefenderWasLucky();
-        $this->updateDefenderHealth();
-        $this->printRoundStats($round);
-        $this->switchPlayerRoles();
+        $player1Speed = $this->player1->getSpeed();
+        $player2Speed = $this->player2->getSpeed();
+
+        if ($player1Speed > $player2Speed) {
+            return [$this->player1, $this->player2];
+        }
+
+        if ($player1Speed < $player2Speed) {
+            return [$this->player2, $this->player1];
+        }
+
+        if ($this->player1->getLuck() > $this->player2->getLuck())
+            return [$this->player1, $this->player2];
+        else
+            return [$this->player2, $this->player1];
     }
 
-    private function isEndOfBattle()
+    private function switchRounds(Character $attacker, Character $defender): void
     {
-        if($this->defender->getHealth() <= 0 || $this->attacker->getHealth() <= 0)
-        {
-            return true;
+        $damage = max(0, $attacker->getStrength() - $defender->getDefense());
+
+        if ($attacker instanceof Hero) {
+            foreach ($attacker->getSkills() as $skill) {
+                $skillMessage = $skill->apply($attacker, $defender, $damage);
+                if ($skillMessage !== null) {
+                    $this->log[] = $skillMessage;
+                }
+            }
         }
 
-        return false;
+        if ($defender instanceof Hero) {
+            foreach ($defender->getSkills() as $skill) {
+                $skillMessage = $skill->apply($attacker, $defender, $damage);
+                if ($skillMessage !== null) {
+                    $this->log[] = $skillMessage;
+                }
+            }
+        }
+
+        $defender->takeDamage($damage);
+        $this->log[] = "{$attacker->getName()} hits {$defender->getName()} for $damage damage. {$defender->getName()}'remaining health: {$defender->getHealth()}";
     }
 
-    private function selectFirstAttacker()
+    private function declareWinner(): void
     {
-        if($this->hero->getSpeed() > $this->beast->getSpeed())
-        {
-            $this->attacker = $this->hero;
-            $this->defender = $this->beast; 
-            return false;
-        }
+        $gameOver = "GAME OVER!!";
 
-        if($this->hero->getSpeed() < $this->beast->getSpeed())
-        {
-            $this->attacker = $this->beast;
-            $this->defender = $this->hero;  
-            return false;
-        }
+        $this->log[] = "";
 
-        if($this->hero->getLuck() > $this->beast->getLuck())
-        {
-            $this->attacker = $this->hero;
-            $this->defender = $this->beast; 
-            return false;
-        }
-
-        if($this->hero->getLuck() < $this->beast->getLuck())
-        {
-            $this->attacker = $this->beast;
-            $this->defender = $this->hero;  
-            return false;
-        }
-
-        $this->attacker = $this->hero;
-        $this->defender = $this->beast; 
-    }
-
-    private function calculateDamage()
-    {
-        $damage = 0;
-        
-        if($this->attacker->getStrength() > $this->defender->getDefence())
-        {
-            return $this->attacker->getStrength() - $this->defender->getDefence();
-        }
-
-        return $damage;
-    }
-
-    private function updateDefenderHealth()
-    {
-        $damage = $this->calculateDamage();
-
-        if($this->defenderWasLucky === true)
-        {
-            $damage = 0;
-        }
-
-        $newHealthValue = $this->defender->getHealth() - $damage;
-
-        if($newHealthValue < 0)
-        {   
-            $newHealthValue = 0;
-        }
-
-        $this->defender->setHealth($newHealthValue);
-    }
-
-    private function switchPlayerRoles()
-    {
-        $temp = $this->attacker;
-        $this->attacker = $this->defender;
-        $this->defender = $temp;
-    }
-
-    public function getWinner()
-    {
-        if($this->attacker->getHealth() > $this->defender->getHealth())
-        {
-            return $this->attacker;
-        }
-
-        return $this->defender;
-    }
-
-    private function checkIfDefenderWasLucky()
-    {
-        $rand = mt_rand(0, 100);
-        if($rand <= $this->defender->getLuck())
-        {
-            $this->defenderWasLucky = true;
+        if (!$this->player1->isAlive()) {
+            $this->log[] = "Winner is: {$this->player2->getName()}";
+            $this->log[] = $gameOver;
             return;
-        }   
+        }
 
-        $this->defenderWasLucky = false;
+        if (!$this->player2->isAlive()) {
+            $this->log[] = "Winner is: {$this->player1->getName()}";
+            $this->log[] = $gameOver;
+            return;
+        }
+
+        $this->log[] = "No winner after {$this->rounds} rounds.";
+        $this->log[] = $gameOver;
     }
 
-    private function printInitialStats()
+    private function prepareInitialStats(Character $attacker, Character $defender): void
     {
-        $this->logger->printInitialStats($this);
-    }
-    
-    private function printRoundStats($currentRound)
-    {
-        $this->logger->printRoundStats($this, $currentRound);
+        $this->log[] = "";
+        $this->log[] = "Start battle!";
+        $this->log[] = "";
+        $this->log[] = "{$attacker->getName()} [Health: {$attacker->getHealth()}, Strength: {$attacker->getStrength()}, Defense: {$attacker->getDefense()}, Speed: {$attacker->getSpeed()}, Luck: {$attacker->getLuck()}]";
+        $this->log[] = "{$defender->getName()} [Health: {$defender->getHealth()}, Strength: {$defender->getStrength()}, Defense: {$defender->getDefense()}, Speed: {$defender->getSpeed()}, Luck: {$defender->getLuck()}]";
+        $this->log[] = "";
     }
 
-    private function printBattleResults()
+    private function printLog(): void
     {
-        $this->logger->printBattleResults($this);
+        foreach ($this->log as $line) {
+            echo $line . PHP_EOL;
+        }
     }
 }

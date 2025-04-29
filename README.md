@@ -1,64 +1,77 @@
 # The hero game
 
-The task simulates a battle between two characters, a hero and a beast.
-Both have a set of randomly generated abilities: health, strength, defence, speed and luck.
+PHP console application that simulates an epic battle between a legendary hero and a wild beast.
 
-To start the battle, run the following command in the console. Also you can to run 'index.php' file in browser.
+## The game features:
+
+- Randomized character stats (health, strength, defense, speed, luck)
+- Turn-based battle mechanics
+- Offensive and defensive skills with activation chances
+- Clear round-by-round battle logs
+- Automatic win detection or draw after 20 rounds
+
+## How to run the game
+1. Clone the repository:
+```
+git clone git@github.com:freelancerwebro/the-hero-game.git
+cd the-hero-game
+```
+
+2. Install dependencies:
+```
+composer install
+```
+
+3. Run the battle simulation:
 ```
 php index.php
 ```
 
-Battle output:
+## Running tests:
 ```
-Start Battle!
+composer test
+```
 
-hero health: 94
-hero strength: 73
-hero speed: 45
-hero defence: 53
-hero luck: 16
 
-beast health: 77
-beast strength: 73
-beast speed: 44
-beast defence: 46
-beast luck: 29
+## Battle output:
+```
+Start battle!
 
-ROUND: 1
-Attacker: Hero
-Attacker Health: 94
-Defender: Wild Beast
-Defender Health: 50
+Wild Beast [Health: 65, Strength: 66, Defense: 59, Speed: 52, Luck: 0.28]
+Orderus [Health: 87, Strength: 78, Defense: 46, Speed: 43, Luck: 0.24]
 
-ROUND: 2
-Attacker: Wild Beast
-Attacker Health: 50
-Defender: Hero
-Defender Health: 74
+ROUND 1
+---------------------------------------------------------------------
+Wild Beast attacks Orderus!
+Wild Beast hits Orderus for 20 damage. Orderus'remaining health: 67
 
-ROUND: 3
-Attacker: Hero
-Attacker Health: 74
-Defender: Wild Beast
-Defender Health: 23
+ROUND 2
+---------------------------------------------------------------------
+Orderus attacks Wild Beast!
+Orderus hits Wild Beast for 19 damage. Wild Beast'remaining health: 46
 
-ROUND: 4
-Attacker: Wild Beast
-Attacker Health: 23
-Defender: Hero
-Defender Health: 54
+ROUND 3
+---------------------------------------------------------------------
+Wild Beast attacks Orderus!
+Orderus activated Magic Shield! Half damage taken!
+Wild Beast hits Orderus for 10 damage. Orderus'remaining health: 57
 
-ROUND: 5
-Attacker: Hero
-Attacker Health: 54
-Defender: Wild Beast
-Defender Health: 0
+ROUND 4
+---------------------------------------------------------------------
+Orderus attacks Wild Beast!
+Orderus used Rapid Strike! Double damage!
+Orderus hits Wild Beast for 38 damage. Wild Beast'remaining health: 8
 
-Winner is: Hero
+ROUND 5
+---------------------------------------------------------------------
+Wild Beast attacks Orderus!
+Wild Beast hits Orderus for 20 damage. Orderus'remaining health: 37
+
+ROUND 6
+---------------------------------------------------------------------
+Orderus attacks Wild Beast!
+Orderus hits Wild Beast for 19 damage. Wild Beast'remaining health: 0
+
+Winner is: Orderus
 GAME OVER!!
-```
-
-Unit tests can be run by the following command:
-```
-vendor/bin/phpunit tests/
 ```
