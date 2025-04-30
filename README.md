@@ -37,41 +37,41 @@ composer test
 ```
 Start battle!
 
-Wild Beast [Health: 65, Strength: 66, Defense: 59, Speed: 52, Luck: 0.28]
-Orderus [Health: 87, Strength: 78, Defense: 46, Speed: 43, Luck: 0.24]
+Wild Beast [Health: 76, Strength: 76, Defense: 48, Speed: 45, Luck: 0.33]
+Orderus [Health: 100, Strength: 74, Defense: 47, Speed: 42, Luck: 0.28]
 
-ROUND 1
----------------------------------------------------------------------
-Wild Beast attacks Orderus!
-Wild Beast hits Orderus for 20 damage. Orderus'remaining health: 67
-
-ROUND 2
----------------------------------------------------------------------
-Orderus attacks Wild Beast!
-Orderus hits Wild Beast for 19 damage. Wild Beast'remaining health: 46
-
-ROUND 3
+==== ROUND 1 ====
 ---------------------------------------------------------------------
 Wild Beast attacks Orderus!
 Orderus activated Magic Shield! Half damage taken!
-Wild Beast hits Orderus for 10 damage. Orderus'remaining health: 57
+Ouch! Orderus takes 14. Orderus'remaining health: 86
 
-ROUND 4
+==== ROUND 2 ====
 ---------------------------------------------------------------------
 Orderus attacks Wild Beast!
-Orderus used Rapid Strike! Double damage!
-Orderus hits Wild Beast for 38 damage. Wild Beast'remaining health: 8
+Ouch! Wild Beast takes 26. Wild Beast'remaining health: 50
 
-ROUND 5
+==== ROUND 3 ====
 ---------------------------------------------------------------------
 Wild Beast attacks Orderus!
-Wild Beast hits Orderus for 20 damage. Orderus'remaining health: 37
+Ouch! Orderus takes 29. Orderus'remaining health: 57
 
-ROUND 6
+==== ROUND 4 ====
 ---------------------------------------------------------------------
 Orderus attacks Wild Beast!
-Orderus hits Wild Beast for 19 damage. Wild Beast'remaining health: 0
+Ouch! Wild Beast takes 26. Wild Beast'remaining health: 24
+
+==== ROUND 5 ====
+---------------------------------------------------------------------
+Wild Beast attacks Orderus!
+Ouch! Orderus takes 29. Orderus'remaining health: 28
+
+==== ROUND 6 ====
+---------------------------------------------------------------------
+Orderus attacks Wild Beast!
+Ouch! Wild Beast takes 26. Wild Beast'remaining health: 0
 
 Winner is: Orderus
 GAME OVER!!
+
 ```
