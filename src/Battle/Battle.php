@@ -6,6 +6,7 @@ namespace HeroGame\Battle;
 
 use HeroGame\Characters\Character;
 use HeroGame\Characters\Hero;
+use HeroGame\Logger\LoggerInterface;
 
 class Battle
 {
@@ -14,7 +15,8 @@ class Battle
 
     public function __construct(
         private readonly Character $player1,
-        private readonly Character $player2
+        private readonly Character $player2,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -122,8 +124,6 @@ class Battle
 
     private function printLog(): void
     {
-        foreach ($this->log as $line) {
-            echo $line . PHP_EOL;
-        }
+        $this->logger->output($this->log);
     }
 }

@@ -7,6 +7,7 @@ namespace Tests\Battle;
 use HeroGame\Battle\Battle;
 use HeroGame\Characters\Beast;
 use HeroGame\Characters\Hero;
+use HeroGame\Logger\ConsoleLogger;
 use PHPUnit\Framework\TestCase;
 
 class BattleTest extends TestCase
@@ -17,8 +18,9 @@ class BattleTest extends TestCase
         $hero->initializeStats();
         $beast = new Beast('Wild Beast');
         $beast->initializeStats();
+        $logger = new ConsoleLogger();
 
-        $battle = new Battle($hero, $beast);
+        $battle = new Battle($hero, $beast, $logger);
 
         ob_start();
         $battle->start();
