@@ -18,12 +18,14 @@ class BattleTest extends TestCase
         $hero->initializeStats();
         $beast = new Beast('Wild Beast');
         $beast->initializeStats();
+
         $logger = new ConsoleLogger();
 
-        $battle = new Battle($hero, $beast, $logger);
+        $battle = new Battle($hero, $beast);
+        $battle->start();
 
         ob_start();
-        $battle->start();
+        $logger->output($battle->getLog());
         $output = ob_get_clean();
 
         $this->assertStringContainsString('Winner is', $output);

@@ -16,7 +16,6 @@ class Battle
     public function __construct(
         private readonly Character $player1,
         private readonly Character $player2,
-        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -42,7 +41,6 @@ class Battle
         }
 
         $this->declareWinner();
-        $this->printLog();
     }
 
     private function decideFirstAttacker(): array
@@ -122,8 +120,8 @@ class Battle
         $this->log[] = "";
     }
 
-    private function printLog(): void
+    public function getLog(): array
     {
-        $this->logger->output($this->log);
+        return $this->log;
     }
 }

@@ -19,7 +19,8 @@ $hero->addSkill(new MagicShield());
 $beast = new Beast('Wild Beast');
 $beast->initializeStats();
 
-$logger = new ConsoleLogger();
-
-$battle = new Battle($hero, $beast, $logger);
+$battle = new Battle($hero, $beast);
 $battle->start();
+
+$logger = new ConsoleLogger();
+$logger->output($battle->getLog());
