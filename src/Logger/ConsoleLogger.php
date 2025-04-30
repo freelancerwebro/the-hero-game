@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace HeroGame\Logger;
 
-class ConsoleLogger implements LoggerInterface
+class ConsoleLogger
 {
     public function output(array $log): void
     {

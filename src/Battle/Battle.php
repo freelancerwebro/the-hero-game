@@ -6,7 +6,6 @@ namespace HeroGame\Battle;
 
 use HeroGame\Characters\Character;
 use HeroGame\Characters\Hero;
-use HeroGame\Logger\LoggerInterface;
 
 class Battle
 {
