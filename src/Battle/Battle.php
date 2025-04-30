@@ -25,7 +25,7 @@ class Battle
         $this->prepareInitialStats($attacker, $defender);
 
         for ($round = 1; $round <= $this->rounds; $round++) {
-            $this->log[] = "ROUND $round";
+            $this->log[] = "==== ROUND $round ====";
             $this->log[] = "---------------------------------------------------------------------";
             $this->log[] = "{$attacker->getName()} attacks {$defender->getName()}!";
 
@@ -84,7 +84,7 @@ class Battle
         }
 
         $defender->takeDamage($damage);
-        $this->log[] = "{$attacker->getName()} hits {$defender->getName()} for $damage damage. {$defender->getName()}'remaining health: {$defender->getHealth()}";
+        $this->log[] = "Ouch! {$defender->getName()} takes $damage. {$defender->getName()}'remaining health: {$defender->getHealth()}";
     }
 
     private function declareWinner(): void
